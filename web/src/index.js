@@ -8,6 +8,7 @@ import App from './App';
 import rootReducer from './reducers';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
+import ReduxThunk from 'redux-thunk';
 
 //redux inject
 const history = createBrowserHistory();
@@ -16,9 +17,10 @@ const store = createStore(
   connectRouter(history)(rootReducer), // new root reducer with router state
   compose(
     applyMiddleware(
+      ReduxThunk,
       routerMiddleware(history)
-    ),
-  ),
+    )
+  )
 )
 
 ReactDOM.render(

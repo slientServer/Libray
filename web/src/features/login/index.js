@@ -3,7 +3,9 @@ import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
 import './index.css';
 import { title } from '../../constants/config';
 import { connect } from 'react-redux';
-import actions from './action';
+import { loginAction } from './action';
+import Captcha from '../../components/captcha';
+import sha256 from 'sha256';
 
 const FormItem = Form.Item;
 
@@ -12,7 +14,8 @@ class Login extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        
+        let finalData = Object.assign({}, values, {'password': sha256(values.password)}, this.props.captchaObj);
+        this.props.dispatchLogin(finalData);
       }
     });
   }
@@ -25,9 +28,9 @@ class Login extends React.Component {
           <span className="titleRow">
             <Icon type="book" style={{ fontSize: 25, color: '#08c' }}/> Welcome to <span className="title">{title}</span>
           </span>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} id="login">
             <FormItem>
-              {getFieldDecorator('userName', {
+              {getFieldDecorator('username', {
                 rules: [{ required: true, message: 'Please input your username!' }],
               })(
                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
@@ -41,6 +44,13 @@ class Login extends React.Component {
               )}
             </FormItem>
             <FormItem>
+              {getFieldDecorator('captcha', {
+                rules: [{ message: 'Please input your Password!' }],
+              })(
+               <Captcha formId = "login" />
+              )}
+            </FormItem>
+            <FormItem>
               {getFieldDecorator('remember', {
                 valuePropName: 'checked',
                 initialValue: true,
@@ -48,7 +58,7 @@ class Login extends React.Component {
                 <Checkbox>Remember me</Checkbox>
               )}
               <a className="login-form-forgot" href="">Forgot password</a>
-              <Button type="primary" htmlType="submit" className="login-form-button" loading={this.props.isFetching}>
+              <Button type="primary" htmlType="submit" className="login-form-button" loading={this.props.isFetching} disabled = {!this.props.isVerified}>
                 Log in
               </Button>
               Or <a href="">register now!</a>
@@ -62,13 +72,16 @@ class Login extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isFetching: state.commonReducer.isFetching || false
+    isFetching: state.commonReducer.isFetching || false,
+    isVerified: state.captchaReducer.isVerified || false,
+    captchaObj: state.captchaReducer.captchaObj || {}
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    dispatchLogin: (value, history) => {
+    dispatchLogin: (value) => {
+      dispatch(loginAction(value));
     }
   }
 }

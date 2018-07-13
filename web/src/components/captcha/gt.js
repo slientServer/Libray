@@ -3,8 +3,7 @@
  * 暴露 initGeetest 进行验证码的初始化
  * 一般不需要用户进行修改
  */
-export default initGeetest = () => {(function (global, factory) {
-    "use strict";
+const initGeetestReact = () => {(function (global, factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         // CommonJS
         module.exports = global.document ?
@@ -19,7 +18,6 @@ export default initGeetest = () => {(function (global, factory) {
         factory(global);
     }
 })(typeof window !== "undefined" ? window : this, function (window, noGlobal) {
-    "use strict";
     if (typeof window === 'undefined') {
         throw new Error('Geetest requires browser environment');
     }
@@ -100,7 +98,7 @@ export default initGeetest = () => {(function (global, factory) {
     var callbacks = {};
     var status = {};
     var random = function () {
-        return parseInt(Math.random() * 10000) + (new Date()).valueOf();
+        return parseInt(Math.random() * 10000, 10) + (new Date()).valueOf();
     };
     var loadScript = function (url, cb) {
         var script = document.createElement("script");
@@ -274,3 +272,5 @@ export default initGeetest = () => {(function (global, factory) {
     window.initGeetest = initGeetest;
     return initGeetest;
 })};
+
+export default initGeetestReact;

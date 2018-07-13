@@ -1,7 +1,5 @@
 const path = require('path');
 const isDev = think.env === 'development';
-const koa-passport = require('koa-passport');
-
 
 module.exports = [
   {
@@ -35,7 +33,14 @@ module.exports = [
   },
   {
     handle: 'router',
-    options: {}
+    options: {
+      defaultModule: 'home',
+      defaultController: 'index',
+      defaultAction: 'index',
+      prefix: [],
+      suffix: [],
+      enableDefaultRouter: true
+    }
   },
   'logic',
   'controller'

@@ -1,6 +1,6 @@
 import { START_REQUEST, FINISH_REQUEST, MESSAGE } from '../constants/actionTypes';
 
-function common(state = [], action) {
+function reducer(state = [], action) {
   switch (action.type) {
     case START_REQUEST:
       return Object.assign({}, state, {
@@ -15,4 +15,4 @@ function common(state = [], action) {
   }
 }
 
-export default common;
+export default reducer;
