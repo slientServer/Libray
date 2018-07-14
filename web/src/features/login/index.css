@@ -22,3 +22,9 @@
 .login-form-button{
   width: 100%;
 }
+
+.borderShadow{
+  border: 2px solid #eae1e1;
+  padding: 40px !important;
+  box-shadow: 3px 3px 2px #ece9e9;
+}

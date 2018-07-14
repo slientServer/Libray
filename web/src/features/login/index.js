@@ -24,11 +24,11 @@ class Login extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Row style={{height: "70%"}} type="flex" align="middle">
-        <Col span={8} offset={8}>
+        <Col span={10} offset={6}>
           <span className="titleRow">
             <Icon type="book" style={{ fontSize: 25, color: '#08c' }}/> Welcome to <span className="title">{title}</span>
           </span>
-          <Form onSubmit={this.handleSubmit} id="login">
+          <Form onSubmit={this.handleSubmit} className="borderShadow">
             <FormItem>
               {getFieldDecorator('username', {
                 rules: [{ required: true, message: 'Please input your username!' }],
@@ -47,7 +47,7 @@ class Login extends React.Component {
               {getFieldDecorator('captcha', {
                 rules: [{ message: 'Please input your Password!' }],
               })(
-               <Captcha formId = "login" />
+               <Captcha/>
               )}
             </FormItem>
             <FormItem>
@@ -61,7 +61,7 @@ class Login extends React.Component {
               <Button type="primary" htmlType="submit" className="login-form-button" loading={this.props.isFetching} disabled = {!this.props.isVerified}>
                 Log in
               </Button>
-              Or <a href="">register now!</a>
+              Or <a href="/register">Register now!</a>
             </FormItem>
           </Form>          
         </Col>

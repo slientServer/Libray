@@ -50,7 +50,47 @@ module.exports = class extends think.Logic {
   }
 
   registerAction () {
-
+    let rules = {
+      username: {
+          string: true,       // 字段类型为 String 类型
+          required: true,     // 字段必填
+          method: 'post',       // 指定获取数据的方式
+          trim: true
+      },
+      password: {
+          string: true,       // 字段类型为 String 类型
+          required: true,     // 字段必填
+          method: 'post',       // 指定获取数据的方式
+          trim: true
+      },
+      confirm: {
+          string: true,       // 字段类型为 String 类型
+          required: true,     // 字段必填
+          method: 'post',       // 指定获取数据的方式
+          trim: true        
+      },
+      email: {
+          string: true,       // 字段类型为 String 类型
+          required: true,     // 字段必填
+          method: 'post',       // 指定获取数据的方式
+          trim: true        
+      },
+      employeeid: {
+          string: true,       // 字段类型为 String 类型
+          required: true,     // 字段必填
+          method: 'post',       // 指定获取数据的方式
+          trim: true        
+      },
+      location: {
+          array: true,
+          required: true,     // 字段必填
+          method: 'post'       // 指定获取数据的方式
+      }
+    }
+    let flag = this.validate(rules);
+    if (!flag) {
+      return this.fail('Please input all required fields!', this.validateErrors);
+    }    
   }
 
   async verifyCaptcha (data) {

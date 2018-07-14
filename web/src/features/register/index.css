@@ -1,0 +1,27 @@
+.title{
+  font-weight: bold;
+  color: #08c;
+}
+
+.register-form-button{
+  margin: 20px 0 10px 0;
+  width: 100%;
+}
+
+#root>div {
+  height: 100%;
+}
+
+.titleRow{
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 30px;
+  font-size: 25px;
+}
+
+.borderShadow{
+  border: 2px solid #eae1e1;
+  padding: 40px !important;
+  box-shadow: 3px 3px 2px #ece9e9;
+}

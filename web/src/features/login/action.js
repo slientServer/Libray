@@ -3,6 +3,9 @@ import { postService } from '../../utils/requestService';
 
 export const loginAction = (data) => {
   return dispatch => {
+    dispatch({
+      type: START_REQUEST
+    });
     postService({
       url: 'auth/login',
       data: data,

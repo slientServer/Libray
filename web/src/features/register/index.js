@@ -1,57 +1,171 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
+import { Form, Input, Icon, Cascader, Row, Col, Button } from 'antd';
 import './index.css';
-import { title } from '../../constants/config';
 import { connect } from 'react-redux';
-import actions from './action';
+import { registerAction } from './action';
+import Captcha from '../../components/captcha';
+import sha256 from 'sha256';
 
 const FormItem = Form.Item;
 
 class Register extends React.Component {
+  constructor () {
+    super();
+    this.state = {
+      confirmDirty: false
+    };
+    this.residences = [];
+    const areaList = ['A', 'B', 'C', 'D'];
+    for (let idx = 1; idx <= 12; idx++) {
+      let area = [];
+      for (let num = 1; num <= 5; num++) {
+        for (let idy = 0; idy < areaList.length; idy++) {
+          area.push({
+            value: areaList[idy] + num,
+            label: areaList[idy] + num
+          });
+        }        
+      }
+      this.residences.push({
+        value: 'PVG' + idx,
+        label: 'PVG' + idx,
+        children: area
+      });
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        
+        let finalData = Object.assign({}, values, {'password': sha256(values.password), 'confirm': sha256(values.confirm)}, this.props.captchaObj);
+        this.props.dispatchRegister(finalData);
       }
     });
   }
 
+  compareToFirstPassword = (rule, value, callback) => {
+    const form = this.props.form;
+    if (value && value !== form.getFieldValue('password')) {
+      callback('Two passwords that you enter is inconsistent!');
+    } else {
+      callback();
+    }
+  }
+
+  validateToNextPassword = (rule, value, callback) => {
+    const form = this.props.form;
+    if (value && this.state.confirmDirty) {
+      form.validateFields(['confirm'], { force: true });
+    }
+    callback();
+  }
+
+  handleConfirmBlur = (e) => {
+    const value = e.target.value;
+    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+      },
+    };
     return (
-      <Row style={{height: "70%"}} type="flex" align="middle">
-        <Col span={8} offset={8}>
+      <Row style={{height: "100%"}} type="flex" align="middle">
+        <Col span={10} offset={6}>
           <span className="titleRow">
-            <Icon type="book" style={{ fontSize: 25, color: '#08c' }}/> Welcome to <span className="title">{title}</span>
+            <Icon type="book" style={{ fontSize: 25, color: '#08c' }}/> Welcome to <span className="title">Register</span>
           </span>
-          <Form onSubmit={this.handleSubmit}>
-            <FormItem>
-              {getFieldDecorator('userName', {
+          <Form onSubmit={this.handleSubmit} className="borderShadow">
+            <FormItem {...formItemLayout}
+              label="User Name">
+              {getFieldDecorator('username', {
                 rules: [{ required: true, message: 'Please input your username!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="username" />
               )}
             </FormItem>
-            <FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="Password"
+            >
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
+                rules: [{
+                  required: true, message: 'Please input your password!',
+                }, {
+                  validator: this.validateToNextPassword,
+                }],
               })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                <Input type="password" placeholder="password"/>
+              )}
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="Confirm Password"
+            >
+              {getFieldDecorator('confirm', {
+                rules: [{
+                  required: true, message: 'Please confirm your password!',
+                }, {
+                  validator: this.compareToFirstPassword,
+                }],
+              })(
+                <Input type="password" onBlur={this.handleConfirmBlur} placeholder="comfirm password"/>
+              )}
+            </FormItem>
+            <FormItem {...formItemLayout}
+              label="Email">
+              {getFieldDecorator('email', {
+                rules: [{ required: true, message: 'Please input your email!', type: 'email' }]
+              })(
+                <Input placeholder="email" />
+              )}
+            </FormItem>
+            <FormItem {...formItemLayout}
+              label="Employee Id">
+              {getFieldDecorator('employeeid', {
+                rules: [{ required: true, message: 'Please input your employee id!' }],
+              })(
+                <Input placeholder="employee id" />
+              )}
+            </FormItem>
+            <FormItem
+                {...formItemLayout}
+                label="Location"
+              >
+                {getFieldDecorator('location', {
+                  initialValue: ['PVG3', 'A3'],
+                  rules: [{ type: 'array', required: true, message: 'Please select your location!' }],
+                })(
+                  <Cascader options={this.residences} />
+                )}
+            </FormItem>
+            <FormItem {...formItemLayout}
+              label="Team">
+              {getFieldDecorator('team', {
+                rules: [{ message: 'Please input your team!' }],
+              })(
+                <Input placeholder="team" />
               )}
             </FormItem>
             <FormItem>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
+              {getFieldDecorator('captcha', {
+                rules: [{ message: 'Please input your Password!' }],
               })(
-                <Checkbox>Remember me</Checkbox>
+               <Captcha/>
               )}
-              <a className="login-form-forgot" href="">Forgot password</a>
-              <Button type="primary" htmlType="submit" className="login-form-button" loading={this.props.isFetching}>
-                Log in
+              <Button type="primary" htmlType="submit" className="register-form-button" loading={this.props.isFetching} disabled = {!this.props.isVerified}>
+                Register
               </Button>
-              Or <a href="">register now!</a>
+              Or <a href="/login">Login!</a>
             </FormItem>
           </Form>          
         </Col>
@@ -62,13 +176,16 @@ class Register extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isFetching: state.commonReducer.isFetching || false
+    isFetching: state.commonReducer.isFetching || false,
+    isVerified: state.captchaReducer.isVerified || false,
+    captchaObj: state.captchaReducer.captchaObj || {}
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    dispatchLogin: (value, history) => {
+    dispatchRegister: (value, history) => {
+      dispatch(registerAction(value));
     }
   }
 }
