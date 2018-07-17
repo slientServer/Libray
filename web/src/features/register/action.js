@@ -1,5 +1,7 @@
-import { START_REQUEST, FINISH_REQUEST} from '../../constants/actionTypes';
+import { START_REQUEST, LOGIN_SUCCESSFULLY } from '../../constants/actionTypes';
 import { postService } from '../../utils/requestService';
+import { message } from 'antd';
+import { push } from 'connected-react-router';
 
 export const registerAction = (data) => {
   return dispatch => {
@@ -9,8 +11,13 @@ export const registerAction = (data) => {
     postService({
       url: 'auth/register',
       data: data,
-      handler: () => {
-
+      handler: (data) => {
+        message.success(data.msg);
+        dispatch({
+          type: LOGIN_SUCCESSFULLY,
+          data: data.userInfo
+        });
+        dispatch(push('/' + data.userInfo.role));
       }
     });
   }

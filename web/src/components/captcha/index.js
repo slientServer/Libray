@@ -40,7 +40,6 @@ class Captcha extends Component {
 
   addCaptchaToDom (captchaObj) {
     captchaObj.appendTo('#captcha');
-    captchaObj.bindForm('#' + this.props.formId);
     captchaObj.onReady(() => {
       this.setState({toggleClass: 'hidden'});
     });

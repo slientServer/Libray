@@ -31,7 +31,7 @@ module.exports = class extends BaseRest {
 
     } else {
       // 正常模式
-      // req.session.fallback = false;
+      await this.session('fallback', false);
       this.ctx.success(res);
     }
   }

@@ -3,28 +3,29 @@ const Geetest = require('gt3-sdk');
 module.exports = class extends think.Logic {
 
   async __before() {
-    this.allowMethods = 'post';
-    let rules = {
-      geetest_challenge: {
-          string: true,       // 字段类型为 String 类型
-          required: true,     // 字段必填
-          method: 'post'       // 指定获取数据的方式
-      },
-      geetest_validate: {
-          string: true,       // 字段类型为 String 类型
-          required: true,     // 字段必填
-          method: 'post'       // 指定获取数据的方式
-      },
-      geetest_seccode: {
-          string: true,       // 字段类型为 String 类型
-          required: true,     // 字段必填
-          method: 'post'       // 指定获取数据的方式
+    if (this.ctx.method === 'POST') {
+      let rules = {
+        geetest_challenge: {
+            string: true,       // 字段类型为 String 类型
+            required: true,     // 字段必填
+            method: 'post'       // 指定获取数据的方式
+        },
+        geetest_validate: {
+            string: true,       // 字段类型为 String 类型
+            required: true,     // 字段必填
+            method: 'post'       // 指定获取数据的方式
+        },
+        geetest_seccode: {
+            string: true,       // 字段类型为 String 类型
+            required: true,     // 字段必填
+            method: 'post'       // 指定获取数据的方式
+        }
       }
-    }
-    let flag = this.validate(rules);
-    let postData = this.ctx.post();
-    if (!flag || ! (await this.verifyCaptcha(postData))) {
-      return this.fail('Please input correct captcha!', this.validateErrors);
+      let flag = this.validate(rules);
+      let postData = this.ctx.post();
+      if (!flag || ! (await this.verifyCaptcha(postData))) {
+        return this.fail('Please input correct captcha!', this.validateErrors);
+      }
     }
   }
 

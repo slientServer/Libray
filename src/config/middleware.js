@@ -1,4 +1,5 @@
 const path = require('path');
+const authorization = require('../middleware/authorization');
 const isDev = think.env === 'development';
 
 module.exports = [
@@ -42,6 +43,7 @@ module.exports = [
       enableDefaultRouter: true
     }
   },
+  'authorization',
   'logic',
   'controller'
 ];
