@@ -4,6 +4,8 @@ import { Route } from 'react-router';
 import './index.css';
 import { push } from 'connected-react-router';
 import { logout } from './action';
+//https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md
+import {withRouter} from 'react-router';
 
 import { Layout, Menu, Icon, Badge, Row, Col, Button, Spin } from 'antd';
 
@@ -106,4 +108,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminLayout);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminLayout));

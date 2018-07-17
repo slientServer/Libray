@@ -1,3 +1,4 @@
+import ResetPassword from '../features/resetPassword';
 import PersonalInfo from '../features/personInfo';
 
 export const title = "Successfactor Libray";
@@ -24,6 +25,13 @@ export const permissionMap = {
       icon: 'user',
       path: '/admin/personalmgt',
       component: PersonalInfo
+    },
+    {
+      label: 'Reset Password',
+      key: '/admin/resetpwd',
+      icon: 'lock',
+      path: '/admin/resetpwd',
+      component: ResetPassword
     }
   ],
   'user': [

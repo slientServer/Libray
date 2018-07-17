@@ -46,8 +46,24 @@ export const postService = ({url, failMsg, handler, data, redirect, dispatch}) =
   })
 }
 
-export const putService = () => {
-
+export const putService = ({url, failMsg, handler, data, redirect, dispatch}) => {
+  axios.put(url, data)
+  .then((response) => {
+    if(response.data.errno === 0){
+      handler(response.data.data);
+    }else{
+      message.error(failMsg || response.data.errmsg || Request_Error);
+      if (redirect && dispatch) {
+        dispatch(push(redirect));
+      }
+    }
+  })
+  .catch((error) => {
+    message.error(Request_Error);
+    if (redirect && dispatch) {
+      dispatch(push(redirect));
+    }
+  })
 }
 
 export const deleteService = () => {

@@ -5,7 +5,7 @@ module.exports = class extends Base {
     let postData = this.ctx.post();
     let userModel = this.model('user');
     let userInfo = await userModel.getUserInfo(postData.username);
-    if (userInfo && userInfo.password === postData.password) {
+    if (userInfo && userInfo.password === postData.password && userInfo.status === 'active') {
       this.ctx.session('user', userInfo);
       return this.success({
         userInfo: {
