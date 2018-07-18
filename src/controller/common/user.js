@@ -14,7 +14,8 @@ module.exports = class extends BaseRest {
       nickname: dbUserInfo.nickname,
       wechat: dbUserInfo.wechat,
       email: dbUserInfo.email,
-      team: dbUserInfo.team
+      team: dbUserInfo.team,
+      role: dbUserInfo.role
     }));
   }
 

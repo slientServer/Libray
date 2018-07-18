@@ -147,7 +147,7 @@ class PersonalInfo extends Component {
           </Col>
           <Col span={12}>
             <FormItem {...formItemLayout}
-              label="Nick Name">
+              label="Nickname">
               {getFieldDecorator('nickname', {
                 rules: [{ message: 'Please input your nickname!' }],
                 initialValue: this.props.userInfo.nickname

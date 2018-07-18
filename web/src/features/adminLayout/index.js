@@ -6,8 +6,9 @@ import { push } from 'connected-react-router';
 import { logout } from './action';
 //https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md
 import {withRouter} from 'react-router';
+import CustomAvatar from '../../components/avatar';
 
-import { Layout, Menu, Icon, Badge, Row, Col, Button, Spin } from 'antd';
+import { Layout, Menu, Icon, Row, Col, Button, Spin } from 'antd';
 
 const { Header, Sider, Content } = Layout;
 
@@ -68,7 +69,7 @@ class AdminLayout extends React.Component {
                 </Col>
                 <Col offset={20} span={1}>
                   <span style={{ marginRight: 24 }}>
-                    <Badge count={1}><Button type="primary" shape="circle" icon="user" /></Badge>
+                    <CustomAvatar username = {this.props.userInfo.username} count = {1}/>
                   </span>
                 </Col>
                 <Col span={1}>

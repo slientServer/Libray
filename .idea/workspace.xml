@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b170338-9ea4-4b3b-ac4d-e1504462bccb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/common/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/common/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware/authorization.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware/authorization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/constants/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/constants/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/features/adminLayout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/features/adminLayout/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/features/login/action.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/features/login/action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/features/personInfo/action.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/features/personInfo/action.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/features/personInfo/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/features/personInfo/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/features/register/action.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/features/register/action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/utils/requestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/utils/requestService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -67,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/web/src/features/adminLayout/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
@@ -2084,7 +2073,7 @@
     <entry file="file://$PROJECT_DIR$/web/src/features/adminLayout/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
