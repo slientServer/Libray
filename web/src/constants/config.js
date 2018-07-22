@@ -1,5 +1,6 @@
 import ResetPassword from '../features/resetPassword';
 import PersonalInfo from '../features/personInfo';
+import AdminUsers from '../features/adminUsers';
 
 export const title = "Successfactor Libray";
 
@@ -10,7 +11,7 @@ export const permissionMap = {
       key: '/admin/usermgt',
       icon: 'team',
       path: '/admin/usermgt',
-      component: PersonalInfo
+      component: AdminUsers
     },
     {
       label: 'Book Management',

@@ -1,4 +1,4 @@
-import { START_REQUEST, FINISH_REQUEST, LOGIN_SUCCESSFULLY, USERINFO_READY } from '../constants/actionTypes';
+import { START_REQUEST, FINISH_REQUEST, REFRESH_CAPTACHA } from '../constants/actionTypes';
 
 function reducer(state = [], action) {
   switch (action.type) {
@@ -10,14 +10,10 @@ function reducer(state = [], action) {
       return Object.assign({}, state, {
         fetching: false
       });
-    case LOGIN_SUCCESSFULLY:
+    case REFRESH_CAPTACHA:
       return Object.assign({}, state, {
-        userInfo: action.data
-      });
-    case USERINFO_READY:
-      return Object.assign({}, state, {
-        userInfo: action.data
-      });    
+        refreshCaptacha: action.data
+      });  
     default:
       return state;
   }
