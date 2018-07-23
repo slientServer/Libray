@@ -10,6 +10,7 @@ export const udpatePasswordAction = (data) => {
     putService({
       url: '/api/common/user',
       data: data,
+      dispatch: dispatch,
       handler: (resData) => {
         message.success(resData);
         dispatch({

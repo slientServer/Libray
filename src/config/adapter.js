@@ -57,12 +57,15 @@ exports.session = {
     cookie: {
       name: 'SFLibrary',
       keys: ['Libray HAHA'],
-      signed: true
+      signed: true,
+      maxAge: 7 * 24 * 3600 * 1000
     }
   },
   file: {
     handle: fileSession,
-    sessionPath: path.join(think.ROOT_PATH, 'runtime/session')
+    sessionPath: path.join(think.ROOT_PATH, 'runtime/session'),
+    autoUpdate: true,
+    maxAge: '7d'
   }
 };
 

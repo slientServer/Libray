@@ -10,6 +10,7 @@ export const requestInitAction = () => {
     });
     getService({
       url: '/api/common/user/' + (new Date()).getTime(),
+      dispatch: dispatch,
       handler: (res) => {
         if (res.errno === 0) {
           dispatch({
@@ -33,6 +34,7 @@ export const udpatePersonalAction = (data) => {
     putService({
       url: '/api/common/user',
       data: data,
+      dispatch: dispatch,
       handler: (res) => {
         if (res.errno === 0) {
           message.success(res.errmsg);

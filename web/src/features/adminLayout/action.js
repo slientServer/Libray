@@ -9,6 +9,7 @@ export const logout = () => {
     });
     getService({
       url: '/auth/logout',
+      dispatch: dispatch,
       handler: (res) => {
         if (res.errno === 0) {
           dispatch(push('/login'));

@@ -11,6 +11,7 @@ export const loginAction = (data) => {
     postService({
       url: 'auth/login',
       data: data,
+      dispatch: dispatch,
       handler: (res) => {
         if (res.errno === 0) {
           dispatch({

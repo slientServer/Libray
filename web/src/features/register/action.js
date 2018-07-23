@@ -11,6 +11,7 @@ export const registerAction = (data) => {
     postService({
       url: 'auth/register',
       data: data,
+      dispatch: dispatch,
       handler: (res) => {
         if (res.errno === 0) {
           dispatch({

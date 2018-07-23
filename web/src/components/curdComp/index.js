@@ -4,6 +4,8 @@ import EditableCell from './editableCell';
 import { getService, postService, putService, deleteService } from '../../utils/requestService';
 import './index.css';
 import sha256 from 'sha256';
+import {withRouter} from 'react-router';
+import { connect } from 'react-redux';
 
 const Search = Input.Search;
 const FormItem = Form.Item;
@@ -79,6 +81,7 @@ class CurdComp extends Component {
           message.error('Data delete failed!');
         }
       },
+      dispatch: this.props.dispatch,
       failMsg: 'Data delete failed!'
     });    
   }
@@ -101,6 +104,7 @@ class CurdComp extends Component {
           message.error('Data update failed!');
         }
       },
+      dispatch: this.props.dispatch,
       failMsg: 'Data update failed!'
     });
   }
@@ -134,6 +138,7 @@ class CurdComp extends Component {
               message.error('Data add failed!');
             }
           },
+          dispatch: this.props.dispatch,
           failMsg: 'Data add failed!'
         });
       }
@@ -168,7 +173,8 @@ class CurdComp extends Component {
           fetching: false
         });
         message.error('Data request failed!');
-      }
+      },
+      dispatch: this.props.dispatch
     });    
   }
 
@@ -276,4 +282,15 @@ class CurdComp extends Component {
   }
 }
 
-export default Form.create()(CurdComp);
+const mapStateToProps = (state, ownProps) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dispatch: dispatch
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Form.create()(CurdComp)));

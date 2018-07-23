@@ -4,10 +4,15 @@
 import axios from 'axios';
 import { message } from 'antd';
 import { Request_Error } from '../constants/message';
+import { push } from 'connected-react-router';
 
-export const getService = ({url, failMsg, handler, errHandler}) => {
+export const getService = ({url, failMsg, handler, errHandler, dispatch}) => {
   axios.get(url)
   .then((response) => {
+    if (response.data.errno === 401) {
+      dispatch(push('/login'));
+      return false;
+    }
     handler(response.data);
   })
   .catch((error) => {
@@ -19,9 +24,13 @@ export const getService = ({url, failMsg, handler, errHandler}) => {
   })
 }
 
-export const postService = ({url, failMsg, handler, data, errHandler}) => {
+export const postService = ({url, failMsg, handler, data, errHandler, dispatch}) => {
   axios.post(url, data)
   .then((response) => {
+    if (response.data.errno === 401) {
+      dispatch(push('/login'));
+      return false;
+    }
     handler(response.data);
   })
   .catch((error) => {
@@ -33,9 +42,13 @@ export const postService = ({url, failMsg, handler, data, errHandler}) => {
   })
 }
 
-export const putService = ({url, failMsg, handler, data, errHandler}) => {
+export const putService = ({url, failMsg, handler, data, errHandler, dispatch}) => {
   axios.put(url, data)
   .then((response) => {
+    if (response.data.errno === 401) {
+      dispatch(push('/login'));
+      return false;
+    }
     handler(response.data);
   })
   .catch((error) => {
@@ -47,9 +60,13 @@ export const putService = ({url, failMsg, handler, data, errHandler}) => {
   })
 }
 
-export const deleteService = ({url, failMsg, handler, errHandler}) => {
+export const deleteService = ({url, failMsg, handler, errHandler, dispatch}) => {
   axios.delete(url)
   .then((response) => {
+    if (response.data.errno === 401) {
+      dispatch(push('/login'));
+      return false;
+    }
     handler(response.data);
   })
   .catch((error) => {

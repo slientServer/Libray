@@ -176,7 +176,7 @@ class PersonalInfo extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    userInfo: state.commonReducer.userInfo || ''
+    userInfo: state.personInfoReducer.userInfo || ''
   }
 }
 

@@ -12,6 +12,7 @@ export const requestCaptchaAction = (addCaptchaToDom) => {
   return dispatch => {
     getService({
       url: 'api/captcha?t=' + (new Date()).getTime(),
+      dispatch: dispatch,
       handler: (data) => {
         // 调用 initGeetest 进行初始化
         // 参数1：配置参数

@@ -12,10 +12,17 @@ module.exports = (passOptions = {}) => {
     let module = ctx.controller && ctx.controller.split('/')[0];
     let requiredPermission = options.permission[module] || 0;
     let userInfo = await ctx.session('user');
-    if ((userInfo && userInfo.permission >= requiredPermission && userInfo.status === 'active') || (requiredPermission === 0)) {
+    if (requiredPermission === 0) {
       return next();
+    }
+    if (userInfo && userInfo.permission >= requiredPermission) {
+      if (userInfo.status === 'active') {
+        return next();
+      } else {
+        return ctx.fail(1001, 'Inactive user！');
+      }
     } else {
-      return ctx.fail(1000, 'No permission or inactive!');
+      return ctx.fail(401, 'No permission!');
     }
   }
 }
