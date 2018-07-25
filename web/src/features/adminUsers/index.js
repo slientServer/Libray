@@ -1,82 +1,86 @@
 import React from 'react';
 import CurdComp from '../../components/curdComp';
+import { injectIntl } from 'react-intl';
 
-function Users(){
+function Users(props){
   const columns = [
-    { title: 'User Name', width: 100, dataIndex: 'username', key: 'username', fixed: 'left', align: 'left' },
-    { title: 'Employee Id', width: 100, dataIndex: 'employeeid', key: 'employeeid', align: 'left' },
-    { title: 'Email', width: 200, dataIndex: 'email', key: 'email', align: 'left', editable: true },
-    { title: 'Location', width: 150, dataIndex: 'location', key: 'location', align: 'left', editable: true },
-    { title: 'Team', width: 150, dataIndex: 'team', key: 'team', align: 'left', editable: true },
-    { title: 'Status', width: 150, dataIndex: 'status', align: 'left', sorter: true, editable: true,
-      compType: 'selection', optionList: [{value: 'draft', label: 'Pending'}, {value: 'active', label: 'Active'}, {value: 'inactive', label: 'Inactive'}]
+    { title: props.intl.formatMessage({id: 'common.Username'}), width: 100, dataIndex: 'username', key: 'username', fixed: 'left', align: 'left' },
+    { title: props.intl.formatMessage({id: 'common.EmployeeId'}), width: 100, dataIndex: 'employeeid', key: 'employeeid', align: 'left' },
+    { title: props.intl.formatMessage({id: 'common.Email'}), width: 200, dataIndex: 'email', key: 'email', align: 'left', editable: true },
+    { title: props.intl.formatMessage({id: 'common.Location'}), width: 150, dataIndex: 'location', key: 'location', align: 'left', editable: true },
+    { title: props.intl.formatMessage({id: 'common.Team'}), width: 150, dataIndex: 'team', key: 'team', align: 'left', editable: true },
+    { title: props.intl.formatMessage({id: 'common.Status'}), width: 150, dataIndex: 'status', align: 'left', sorter: true, editable: true,
+      compType: 'selection', optionList: [{value: 'draft', label: props.intl.formatMessage({id: 'common.Pending'})}, 
+      {value: 'active', label: props.intl.formatMessage({id: 'common.Active'})}, 
+      {value: 'inactive', label: props.intl.formatMessage({id: 'common.Inactive'})}]
     },
-    { title: 'Role', width: 150, dataIndex: 'role', align: 'left', sorter: true, editable: true,
-      compType: 'selection', optionList: [{value: 'user', label: 'User'}, {value: 'admin', label: 'Admin'}]
+    { title: props.intl.formatMessage({id: 'common.Role'}), width: 150, dataIndex: 'role', align: 'left', sorter: true, editable: true,
+      compType: 'selection', optionList: [{value: 'user', label: props.intl.formatMessage({id: 'common.User'})}, {value: 'admin', label: props.intl.formatMessage({id: 'common.Admin'})}]
     },
-    { title: 'Wechat', width: 150, dataIndex: 'wechat', key: 'wechat', align: 'left', editable: true },
-    { title: 'Gender', width: 150, dataIndex: 'gender', key: 'gender', sorter: true, align: 'left',  
-      editable: true, compType: 'selection', optionList: [{value: 'female', label: 'Female'}, {value: 'male', label: 'Male'}]
+    { title: props.intl.formatMessage({id: 'common.Wechat'}), width: 150, dataIndex: 'wechat', key: 'wechat', align: 'left', editable: true },
+    { title: props.intl.formatMessage({id: 'common.Gender'}), width: 150, dataIndex: 'gender', key: 'gender', sorter: true, align: 'left',  
+      editable: true, compType: 'selection', optionList: [{value: 'female', label: props.intl.formatMessage({id: 'common.Female'})}, 
+      {value: 'male', label: props.intl.formatMessage({id: 'common.Male'})}]
     },
-    { title: 'Phone', width: 200, dataIndex: 'phone', align: 'left', sorter: true, editable: true}
+    { title: props.intl.formatMessage({id: 'common.Phone'}), width: 200, dataIndex: 'phone', align: 'left', sorter: true, editable: true}
   ];
   const configuration={
     searchKey: 'email',
-    tooltip: 'Please input email...', 
+    tooltip: props.intl.formatMessage({id: 'curd.search.hint'}),
     actions: ['add', 'delete'],
     url: '/api/admin/user',
     addConfig: [
       {
         type: 'Input',
-        label: 'Username',
+        label: props.intl.formatMessage({id: 'common.Username'}),
         key: 'username',
         required: true
       }, {
         type: 'Input',
-        label: 'Employee Id',
+        label: props.intl.formatMessage({id: 'common.EmployeeId'}),
         key: 'employeeid',
         required: true
       }, {
         type: 'Input',
-        label: 'Email',
+        label: props.intl.formatMessage({id: 'common.Email'}),
         key: 'email',
         required: true,
         validType: 'email'       
       }, {
         type: 'Input',
-        label: 'Location',
+        label: props.intl.formatMessage({id: 'common.Location'}),
         key: 'location'      
       }, {
         type: 'Select',
         key: 'status',
-        label: 'Status',
-        options: [{key: 'draft', label: 'Pending'}, {key: 'inactive', label: 'Inactive'}, {key: 'active', label: 'Active'}],
+        label: props.intl.formatMessage({id: 'common.Status'}),
+        options: [{key: 'draft', label: props.intl.formatMessage({id: 'common.Pending'})}, {key: 'inactive', label: props.intl.formatMessage({id: 'common.Inactive'})}, {key: 'active', label: props.intl.formatMessage({id: 'common.Active'})}],
         defaultValue: 'active',
         required: true
       }, {
         type: 'Select',
         key: 'role',
-        label: 'Role',
-        options: [{key: 'admin', label: 'Admin'}, {key: 'user', label: 'User'}],
+        label: props.intl.formatMessage({id: 'common.Role'}),
+        options: [{key: 'admin', label: props.intl.formatMessage({id: 'common.Admin'})}, {key: 'user', label: props.intl.formatMessage({id: 'common.User'})}],
         defaultValue: 'user',
         required: true
       },  {
         type: 'Input',
-        label: 'Team',
+        label: props.intl.formatMessage({id: 'common.Team'}),
         key: 'team'      
       }, {
         type: 'Select',
         key: 'gender',
-        label: 'Gender',
-        options: [{key: 'male', label: 'Male'}, {key: 'female', label: 'Female'}],
+        label: props.intl.formatMessage({id: 'common.Gender'}),
+        options: [{key: 'male', label: props.intl.formatMessage({id: 'common.Male'})}, {key: 'female', label: props.intl.formatMessage({id: 'common.Female'})}],
         defaultValue: 'male'
       }, {
         type: 'Input',
-        label: 'Phone',
+        label: props.intl.formatMessage({id: 'common.Phone'}),
         key: 'phone'
       }, {
         type: 'Input',
-        label: 'Wechat',
+        label: props.intl.formatMessage({id: 'common.Wechat'}),
         key: 'wechat'
       }
     ]
@@ -84,4 +88,4 @@ function Users(){
   return <CurdComp columns={columns} configuration={configuration} />;
 }
 
-export default Users;
+export default injectIntl(Users);

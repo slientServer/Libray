@@ -6,6 +6,7 @@ import initGeetestReact from './gt';
 import './index.css';
 import { connect } from 'react-redux';
 import { verifiedAction, requestCaptchaAction, resetRefreshCaptachaAction } from './action';
+import { FormattedMessage } from 'react-intl';
 
 class Captcha extends Component {
 
@@ -40,7 +41,7 @@ class Captcha extends Component {
   render () {
     return (
       <div id="captcha">
-        <p className={this.state.toggleClass}>Captcha Loading...</p>
+        <p className={this.state.toggleClass}><FormattedMessage id="common.Loading"/></p>
       </div>
     );
   }

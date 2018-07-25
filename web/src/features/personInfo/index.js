@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestInitAction, udpatePersonalAction } from './action';
+import { injectIntl } from 'react-intl';
 
 import { Form, Input, Icon, Cascader, Row, Col, Button } from 'antd';
 
@@ -62,23 +63,23 @@ class PersonalInfo extends Component {
         <Row>
           <Col span={12} >
             <FormItem {...formItemLayout}
-              label="User Name">
+              label={this.props.intl.formatMessage({id: 'common.Username'})}>
               {getFieldDecorator('username', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [{ required: true, message: this.props.intl.formatMessage({id: 'login.required.username'}) }],
                 initialValue: this.props.userInfo.username
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="username" disabled/>
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder={this.props.intl.formatMessage({id: 'common.Username'})} disabled/>
               )}
             </FormItem>
           </Col>
           <Col span={12}>
             <FormItem {...formItemLayout}
-              label="Email">
+              label={this.props.intl.formatMessage({id: 'common.Email'})}>
               {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please input your email!', type: 'email' }],
+                rules: [{ required: true, message: this.props.intl.formatMessage({id: 'register.required.email'}), type: 'email' }],
                 initialValue: this.props.userInfo.email
               })(
-                <Input placeholder="email" />
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.Email'})} />
               )}
             </FormItem>
           </Col>
@@ -86,23 +87,23 @@ class PersonalInfo extends Component {
         <Row>
           <Col span={12}>
             <FormItem {...formItemLayout}
-              label="Employee Id">
+              label={this.props.intl.formatMessage({id: 'common.EmployeeId'})}>
               {getFieldDecorator('employeeid', {
-                rules: [{ required: true, message: 'Please input your employee id!' }],
+                rules: [{ required: true, message: this.props.intl.formatMessage({id: 'register.required.employeeid'}) }],
                 initialValue: this.props.userInfo.employeeid
               })(
-                <Input placeholder="employee id" disabled/>
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.EmployeeId'})} disabled/>
               )}
             </FormItem>
           </Col>
           <Col span={12}>
             <FormItem {...formItemLayout}
-              label="Phone">
+              label={this.props.intl.formatMessage({id: 'common.Phone'})}>
               {getFieldDecorator('phone', {
-                rules: [{ message: 'Please input your phone!' }],
+                rules: [],
                 initialValue: this.props.userInfo.phone
               })(
-                <Input placeholder="phone" />
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.Phone'})} />
               )}
             </FormItem>
           </Col>
@@ -111,11 +112,11 @@ class PersonalInfo extends Component {
           <Col span={12} >
             <FormItem
                 {...formItemLayout}
-                label="Location"
+                label={this.props.intl.formatMessage({id: 'common.Location'})}
               >
                 {getFieldDecorator('location', {
                   initialValue: this.props.userInfo && this.props.userInfo.location && this.props.userInfo.location.split('|'),
-                  rules: [{ type: 'array', required: true, message: 'Please select your location!' }],
+                  rules: [{ type: 'array', required: true, message: this.props.intl.formatMessage({id: 'register.required.location'}) }],
                 })(
                   <Cascader options={residences} />
                 )}
@@ -123,12 +124,12 @@ class PersonalInfo extends Component {
           </Col>
           <Col span={12}>
             <FormItem {...formItemLayout}
-              label="Team">
+              label={this.props.intl.formatMessage({id: 'common.Team'})}>
               {getFieldDecorator('team', {
-                rules: [{ message: 'Please input your team!' }],
+                rules: [],
                 initialValue: this.props.userInfo.team
               })(
-                <Input placeholder="team" />
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.Team'})} />
               )}
             </FormItem>
           </Col>
@@ -136,23 +137,23 @@ class PersonalInfo extends Component {
         <Row>
           <Col span={12}>
             <FormItem {...formItemLayout}
-              label="Wechat">
+              label={this.props.intl.formatMessage({id: 'common.Wechat'})}>
               {getFieldDecorator('wechat', {
-                rules: [{ message: 'Please input your wechat!' }],
+                rules: [],
                 initialValue: this.props.userInfo.wechat
               })(
-                <Input placeholder="wechat" />
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.Wechat'})} />
               )}
             </FormItem>
           </Col>
           <Col span={12}>
             <FormItem {...formItemLayout}
-              label="Nickname">
+              label={this.props.intl.formatMessage({id: 'common.Nickname'})}>
               {getFieldDecorator('nickname', {
-                rules: [{ message: 'Please input your nickname!' }],
+                rules: [],
                 initialValue: this.props.userInfo.nickname
               })(
-                <Input placeholder="nickname" />
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.Nickname'})} />
               )}
             </FormItem>
           </Col>
@@ -160,12 +161,12 @@ class PersonalInfo extends Component {
         <Row>
           <Col span={4} offset={8}>
             <Button type="primary" htmlType="submit">
-              Save
+              {this.props.intl.formatMessage({id: 'common.Save'})}
             </Button>
           </Col>
           <Col span={4}>
             <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
-              Clear
+              {this.props.intl.formatMessage({id: 'common.Cancel'})}
             </Button>
           </Col>
         </Row>
@@ -191,4 +192,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(PersonalInfo));
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(injectIntl(PersonalInfo)));

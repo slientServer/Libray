@@ -7,8 +7,9 @@ import { logout } from './action';
 //https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md
 import {withRouter} from 'react-router';
 import CustomAvatar from '../../components/avatar';
+import { injectIntl } from 'react-intl';
 
-import { Layout, Menu, Icon, Row, Col, Button, Spin } from 'antd';
+import { Layout, Menu, Icon, Row, Col, Button, Spin, Select } from 'antd';
 
 const { Header, Sider, Content } = Layout;
 
@@ -18,6 +19,9 @@ class AdminLayout extends React.Component {
     this.defaultSelectedKeys = [this.props.siderbarList[0].key];
     this.props.updateRoute(this.props.siderbarList[0].key);
     this.logout = this.logout.bind(this);
+    this.state = {
+      defaultLang: window.localStorage.getItem('locale') || 'en'
+    };
   }
 
   state = {
@@ -35,12 +39,19 @@ class AdminLayout extends React.Component {
   }
 
   logout = () => {
-    this.props.logout();
+    this.props.logout({
+      failMsg: this.props.intl.formatMessage({id: 'error.logout'})
+    });
+  }
+
+  langChange = (data) => {
+    window.localStorage.setItem('locale', data);
+    window.location.reload();
   }
 
   render() {
     return (
-      <Spin tip="Loading..." spinning={this.props.isFetching}>
+      <Spin tip={this.props.intl.formatMessage({id:'common.Loading'})} spinning={this.props.isFetching}>
         <Layout>
           <Sider
             trigger={null}
@@ -67,7 +78,13 @@ class AdminLayout extends React.Component {
                     onClick={this.toggle}
                   />
                 </Col>
-                <Col offset={20} span={1}>
+                <Col offset={18} span={2}>
+                  <Select defaultValue={ this.state.defaultLang } onChange={this.langChange}>
+                    <Select.Option value="en">{this.props.intl.formatMessage({id: 'common.lang.en'})}</Select.Option>
+                    <Select.Option value="zh">{this.props.intl.formatMessage({id: 'common.lang.zh'})}</Select.Option>
+                  </Select>
+                </Col>
+                <Col span={1}>
                   <span style={{ marginRight: 24 }}>
                     <CustomAvatar username = {this.props.userInfo.username || window.localStorage.getItem('username') } count = {1}/>
                   </span>
@@ -103,10 +120,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     updateRoute: (route) => {
       dispatch(push(route));
     },
-    logout: () => {
-      dispatch(logout());
+    logout: ({failMsg}) => {
+      dispatch(logout({failMsg}));
     }
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminLayout));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(injectIntl(AdminLayout)));

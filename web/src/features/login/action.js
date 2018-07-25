@@ -21,7 +21,7 @@ export const loginAction = (data) => {
           dispatch(push('/' + res.data.userInfo.role));
           window.localStorage.setItem('username', res.data.userInfo.username);
         } else {
-          message.error(res.errmsg || 'Login failed!');
+          message.error(res.errmsg);
           dispatch({
             type: REFRESH_CAPTACHA,
             data: true

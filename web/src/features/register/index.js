@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { registerAction } from './action';
 import Captcha from '../../components/captcha';
 import sha256 from 'sha256';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 const FormItem = Form.Item;
 
@@ -71,101 +72,97 @@ class Register extends React.Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
+        sm: { span: 5 },
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 19 },
       },
     };
     return (
       <Row style={{height: "100%"}} type="flex" align="middle">
-        <Col span={10} offset={6}>
+        <Col span={10} offset={7}>
           <span className="titleRow">
-            <Icon type="book" style={{ fontSize: 25, color: '#08c' }}/> Welcome to <span className="title">Register</span>
+            <Icon type="book" style={{ fontSize: 25, color: '#08c' }}/> <span className="title"><FormattedMessage id="register.Register"/></span>
           </span>
           <Form onSubmit={this.handleSubmit} className="borderShadow">
-            <FormItem {...formItemLayout}
-              label="User Name">
+            <FormItem {...formItemLayout} label={this.props.intl.formatMessage({id: 'common.Username'})}>
               {getFieldDecorator('username', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [{ required: true, message: this.props.intl.formatMessage({id: 'login.required.username'}) }],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="username" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder={this.props.intl.formatMessage({id: 'common.Username'})} />
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="Password"
+              label={this.props.intl.formatMessage({id: 'common.Password'})}
             >
               {getFieldDecorator('password', {
                 rules: [{
-                  required: true, message: 'Please input your password!',
+                  required: true, message: this.props.intl.formatMessage({id: 'login.required.password'}),
                 }, {
                   validator: this.validateToNextPassword,
                 }],
               })(
-                <Input type="password" placeholder="password"/>
+                <Input type="password" placeholder={this.props.intl.formatMessage({id: 'common.Password'})}/>
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="Confirm Password"
+              label={this.props.intl.formatMessage({id: 'register.Confirm.password'})}
             >
               {getFieldDecorator('confirm', {
                 rules: [{
-                  required: true, message: 'Please confirm your password!',
+                  required: true, message: this.props.intl.formatMessage({id: 'register.required.confirm.password'}),
                 }, {
                   validator: this.compareToFirstPassword,
                 }],
               })(
-                <Input type="password" onBlur={this.handleConfirmBlur} placeholder="comfirm password"/>
+                <Input type="password" onBlur={this.handleConfirmBlur} placeholder={this.props.intl.formatMessage({id: 'register.Confirm.password'})}/>
               )}
             </FormItem>
-            <FormItem {...formItemLayout}
-              label="Email">
+            <FormItem {...formItemLayout} label={this.props.intl.formatMessage({id: 'common.Email'})}>
               {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please input your email!', type: 'email' }]
+                rules: [{ required: true, message: this.props.intl.formatMessage({id: 'register.required.email'}), type: 'email' }]
               })(
-                <Input placeholder="email" />
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.Email'})} />
               )}
             </FormItem>
-            <FormItem {...formItemLayout}
-              label="Employee Id">
+            <FormItem {...formItemLayout} label={this.props.intl.formatMessage({id: 'common.EmployeeId'})}>
               {getFieldDecorator('employeeid', {
-                rules: [{ required: true, message: 'Please input your employee id!' }],
+                rules: [{ required: true, message: this.props.intl.formatMessage({id: 'register.required.employeeid'}) }],
               })(
-                <Input placeholder="employee id" />
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.EmployeeId'})} />
               )}
             </FormItem>
             <FormItem
                 {...formItemLayout}
-                label="Location"
+                label={this.props.intl.formatMessage({id: 'common.Location'})}
               >
                 {getFieldDecorator('location', {
                   initialValue: ['PVG3', 'A3'],
-                  rules: [{ type: 'array', required: true, message: 'Please select your location!' }],
+                  rules: [{ type: 'array', required: true, message: this.props.intl.formatMessage({id: 'register.required.location'}) }],
                 })(
                   <Cascader options={this.residences} />
                 )}
             </FormItem>
-            <FormItem {...formItemLayout}
-              label="Team">
+            <FormItem {...formItemLayout} label={this.props.intl.formatMessage({id: 'common.Team'})}>
               {getFieldDecorator('team', {
-                rules: [{ message: 'Please input your team!' }],
+                rules: [],
               })(
-                <Input placeholder="team" />
+                <Input placeholder={this.props.intl.formatMessage({id: 'common.Team'})} />
               )}
             </FormItem>
             <FormItem>
               {getFieldDecorator('captcha', {
-                rules: [{ message: 'Please input your Password!' }],
+                rules: [],
               })(
                <Captcha/>
               )}
               <Button type="primary" htmlType="submit" className="register-form-button" loading={this.props.isFetching} disabled = {!this.props.isVerified}>
-                Register
+                {this.props.intl.formatMessage({id: 'register.Register'})}
               </Button>
-              Or <a href="/login">Login!</a>
+              {this.props.intl.formatMessage({id: 'common.Or'})} <a href="/login">{this.props.intl.formatMessage({id: 'login.Login'})}!</a>
             </FormItem>
           </Form>          
         </Col>
@@ -190,4 +187,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Register));
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(injectIntl(Register)));

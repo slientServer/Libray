@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { udpatePasswordAction } from './action';
 import sha256 from 'sha256';
-
+import { injectIntl } from 'react-intl';
 import { Form, Input, Row, Col, Button } from 'antd';
 
 const FormItem = Form.Item;
@@ -66,32 +66,32 @@ class RsetPassword extends Component {
           <Col span={12} >
             <FormItem
               {...formItemLayout}
-              label="Password"
+              label={this.props.intl.formatMessage({id: 'common.Password'})}
             >
               {getFieldDecorator('password', {
                 rules: [{
-                  required: true, message: 'Please input your password!',
+                  required: true, message: this.props.intl.formatMessage({id: 'login.required.password'})
                 }, {
                   validator: this.validateToNextPassword,
                 }],
               })(
-                <Input type="password" placeholder="password"/>
+                <Input type="password" placeholder={this.props.intl.formatMessage({id: 'common.Password'})}/>
               )}
             </FormItem>
           </Col>
           <Col span={12}>
             <FormItem
               {...formItemLayout}
-              label="Confirm Password"
+              label={this.props.intl.formatMessage({id: 'register.Confirm.password'})}
             >
               {getFieldDecorator('confirm', {
                 rules: [{
-                  required: true, message: 'Please confirm your password!',
+                  required: true, message: this.props.intl.formatMessage({id: 'register.required.confirm.password'})
                 }, {
                   validator: this.compareToFirstPassword,
                 }],
               })(
-                <Input type="password" onBlur={this.handleConfirmBlur} placeholder="comfirm password"/>
+                <Input type="password" onBlur={this.handleConfirmBlur} placeholder={this.props.intl.formatMessage({id: 'register.Confirm.password'})}/>
               )}
             </FormItem>
           </Col>
@@ -99,7 +99,7 @@ class RsetPassword extends Component {
         <Row>
           <Col span={4} offset={20}>
             <Button type="primary" htmlType="submit">
-              Save
+              {this.props.intl.formatMessage({id: 'common.Save'})}
             </Button>
           </Col>
         </Row>
@@ -121,4 +121,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(RsetPassword));
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(injectIntl(RsetPassword)));

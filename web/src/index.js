@@ -10,6 +10,15 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import ReduxThunk from 'redux-thunk';
 
+import { addLocaleData, IntlProvider } from 'react-intl';
+import zhLocaleData from 'react-intl/locale-data/zh';
+import defaultMessages from './i18n/default';
+import zhMessages from './i18n/zh';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import enUS from 'antd/lib/locale-provider/en_US';
+import { LocaleProvider } from 'antd';
+
+
 //redux inject
 const history = createBrowserHistory();
 
@@ -23,12 +32,29 @@ const store = createStore(
   )
 )
 
+addLocaleData(zhLocaleData);
+
+const locale = window.localStorage.getItem('locale') || defaultMessages.locale;
+const messageMap = {
+  'zh': zhMessages.messages,
+  'en': defaultMessages.messages
+};
+const localeMap = {
+  'zh': zhCN,
+  'en': enUS
+}
+
+
 ReactDOM.render(
-  <Provider store = {store}>
-    <ConnectedRouter history = {history}>
-      <App />
-    </ConnectedRouter>
-  </Provider>
+  <IntlProvider locale={locale} messages={messageMap[locale]}>
+    <LocaleProvider locale={localeMap[locale]}>
+      <Provider store = {store}>
+        <ConnectedRouter history = {history}>
+          <App />
+        </ConnectedRouter>
+      </Provider>
+    </LocaleProvider>
+  </IntlProvider>
   , document.getElementById('root'));
 
 registerServiceWorker();

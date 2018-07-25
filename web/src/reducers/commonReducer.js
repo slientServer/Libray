@@ -13,7 +13,7 @@ function reducer(state = [], action) {
     case REFRESH_CAPTACHA:
       return Object.assign({}, state, {
         refreshCaptacha: action.data
-      });  
+      }); 
     default:
       return state;
   }

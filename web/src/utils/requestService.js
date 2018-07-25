@@ -3,7 +3,6 @@
 */
 import axios from 'axios';
 import { message } from 'antd';
-import { Request_Error } from '../constants/message';
 import { push } from 'connected-react-router';
 
 export const getService = ({url, failMsg, handler, errHandler, dispatch}) => {
@@ -19,7 +18,7 @@ export const getService = ({url, failMsg, handler, errHandler, dispatch}) => {
     if (errHandler) {
       errHandler(error);
     } else {
-      message.error(failMsg || Request_Error);     
+      message.error(failMsg);     
     }
   })
 }
@@ -37,7 +36,7 @@ export const postService = ({url, failMsg, handler, data, errHandler, dispatch})
     if (errHandler) {
       errHandler(error);
     } else {
-      message.error(failMsg || Request_Error);     
+      message.error(failMsg);     
     }
   })
 }
@@ -55,7 +54,7 @@ export const putService = ({url, failMsg, handler, data, errHandler, dispatch}) 
     if (errHandler) {
       errHandler(error);
     } else {
-      message.error(failMsg || Request_Error);     
+      message.error(failMsg);     
     }
   })
 }
@@ -73,7 +72,7 @@ export const deleteService = ({url, failMsg, handler, errHandler, dispatch}) => 
     if (errHandler) {
       errHandler(error);
     } else {
-      message.error(failMsg || Request_Error);     
+      message.error(failMsg);     
     }
   })
 }

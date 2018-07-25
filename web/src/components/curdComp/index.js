@@ -6,6 +6,7 @@ import './index.css';
 import sha256 from 'sha256';
 import {withRouter} from 'react-router';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 const Search = Input.Search;
 const FormItem = Form.Item;
@@ -31,15 +32,15 @@ class CurdComp extends Component {
     });
     if (this.props.configuration.actions && this.props.configuration.actions.indexOf('delete') !== -1) {
       columns.push({
-        title: 'Actions',
+        title: props.intl.formatMessage({id: 'common.Actions'}),
         width: 150,
         fixed: 'right',
         key: 'action',
         align: 'left',
         render: (text, record) => (
           <span>
-            <Popconfirm title="Please double check if you want?" onConfirm={() => {this.deleteItem(record.id)}} okText="Conform" cancelText="Cancel">
-              <a>Delete</a>
+            <Popconfirm title={this.props.intl.formatMessage({id: "curd.confirm.message"})} onConfirm={() => {this.deleteItem(record.id)}} okText={this.props.intl.formatMessage({id: 'common.Confirm'})} cancelText={this.props.intl.formatMessage({id: 'common.Cancel'})}>
+              <a>{this.props.intl.formatMessage({id: 'common.Delete'})}</a>
             </Popconfirm>
           </span>
         ),
@@ -210,11 +211,11 @@ class CurdComp extends Component {
           style= {{ width: 200}}
           size= "small"
         />
-        {this.props.configuration.actions.indexOf('add') !== -1 &&  <Button type="primary" icon="plus-square-o" size="small" style={{marginLeft: "20px"}} onClick={this.onAdd} ghost>Add</Button>}
+        {this.props.configuration.actions.indexOf('add') !== -1 &&  <Button type="primary" icon="plus-square-o" size="small" style={{marginLeft: "20px"}} onClick={this.onAdd} ghost>{this.props.intl.formatMessage({id: 'common.Add'})}</Button>}
       </Col>
     </Row>
     <Table scroll={{x: 1600}} size="small" rowKey={record => record.id} onChange={this.onTableUpdate} loading={this.state.fetching} columns={this.state.columns} dataSource={this.state.data} pagination={this.state.pagination} />
-    <Modal title="Add"
+    <Modal title={this.props.intl.formatMessage({'id': 'common.Add'})}
       visible={this.state.visible}
       onOk={this.addExec}
       confirmLoading={this.state.confirmLoading}
@@ -228,8 +229,8 @@ class CurdComp extends Component {
                 {getFieldDecorator(item.key, {
                   initialValue: item.defaultValue,
                   rules: [
-                    { required: item.required, message: 'Required field!' },
-                    { type: item.validType, message: 'Please input right type!'}
+                    { required: item.required, message: this.props.intl.formatMessage({id: 'curd.required.field'}) },
+                    { type: item.validType, message: this.props.intl.formatMessage({id: 'curd.right.type'})}
                   ],
                 })(
                   <Input />
@@ -240,7 +241,7 @@ class CurdComp extends Component {
                 {getFieldDecorator(item.key, {
                   initialValue: item.defaultValue,
                   rules: [
-                    { required: item.required, message: 'Required field!' },
+                    { required: item.required, message: this.props.intl.formatMessage({id: 'curd.required.field'}) },
                   ],
                 })(
                   <InputNumber />
@@ -251,8 +252,8 @@ class CurdComp extends Component {
                 {getFieldDecorator(item.key, {
                   initialValue: item.defaultValue,
                   rules: [
-                    { required: item.required, message: 'Required field!' },
-                    { type: item.validType, message: 'Please input right type!'}
+                    { required: item.required, message: this.props.intl.formatMessage({id: 'curd.required.field'}) },
+                    { type: item.validType, message: this.props.intl.formatMessage({id: 'curd.right.type'})}
                   ],
                 })(
                   <TextArea />
@@ -263,8 +264,8 @@ class CurdComp extends Component {
                 {getFieldDecorator(item.key, {
                   initialValue: item.defaultValue,
                   rules: [
-                    { required: item.required, message: 'Required field!' },
-                    { type: item.validType, message: 'Please input right type!'}
+                    { required: item.required, message: this.props.intl.formatMessage({id: 'curd.required.field'}) },
+                    { type: item.validType, message: this.props.intl.formatMessage({id: 'curd.right.type'})}
                   ],
                 })(
                   <Select>
@@ -293,4 +294,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Form.create()(CurdComp)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Form.create()(injectIntl(CurdComp))));
