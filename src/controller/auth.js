@@ -37,7 +37,7 @@ module.exports = class extends Base {
     try {
       let postData = this.ctx.post();
       let userModel = this.model('user');
-      let finalData = Object.assign({}, {role: 'user', permission: 1, username: postData.username, password: postData.password, email: postData.email, employeeid: postData.employeeid, location: postData.location.join('|')});
+      let finalData = Object.assign({}, {company: postData.company, role: 'user', permission: 1, username: postData.username, password: postData.password, email: postData.email, employeeid: postData.employeeid, location: postData.location.join('|')});
       let result = await userModel.addNewUser(finalData);
       if (result) {
         return this.success({

@@ -86,6 +86,11 @@ module.exports = class extends think.Logic {
           array: true,
           required: true,     // 字段必填
           method: 'post'       // 指定获取数据的方式
+      },
+      company: {
+        string: true,
+        required: true,     // 字段必填
+        method: 'post'       // 指定获取数据的方式
       }
     }
     let flag = this.validate(rules);

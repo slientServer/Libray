@@ -86,6 +86,14 @@ class Register extends React.Component {
             <Icon type="book" style={{ fontSize: 25, color: '#08c' }}/> <span className="title"><FormattedMessage id="register.Register"/></span>
           </span>
           <Form onSubmit={this.handleSubmit} className="borderShadow">
+            <FormItem {...formItemLayout} label={this.props.intl.formatMessage({id: 'common.Company'})}>
+              {getFieldDecorator('company', {
+                rules: [{ required: true, message: this.props.intl.formatMessage({id: 'register.required.company'}) }],
+                initialValue: this.props.history.location.hash.split('#')[1] || ''
+              })(
+                <Input disabled prefix={<Icon type="home" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder={this.props.intl.formatMessage({id: 'common.Company'})} />
+              )}
+            </FormItem>
             <FormItem {...formItemLayout} label={this.props.intl.formatMessage({id: 'common.Username'})}>
               {getFieldDecorator('username', {
                 rules: [{ required: true, message: this.props.intl.formatMessage({id: 'login.required.username'}) }],

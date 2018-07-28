@@ -55,8 +55,8 @@ const lang = {
     'common.Female': '中文Female',
     'common.Male': '中文Male',
     'common.Actions': '中文Actions',
-    'common.lang.en': '中文English',
-    'common.lang.zh': '中文中文',
+    'common.lang.en': 'English',
+    'common.lang.zh': '中文',
     //Error
     'error.update': '中文{item} update failed!',
     'error.add': '中文{item} add failed!',

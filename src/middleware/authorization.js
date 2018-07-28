@@ -2,7 +2,8 @@ const defaultOptions = {
   permission: {
     common: 2,
     user: 2,
-    admin: 3
+    admin: 3,
+    super: 5
   }
 }
 

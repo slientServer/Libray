@@ -16,6 +16,7 @@ const lang = {
     'register.required.email': 'Please input your email!',
     'register.required.employeeid': 'Please input your employee id!',
     'register.required.location': 'Please select your location!',
+    'register.required.company': 'Please register with right url!',
     //Curd
     'curd.confirm.message': 'Please double check if you want?',
     'curd.required.field': 'Required field!',
@@ -24,6 +25,7 @@ const lang = {
     //Admin
     'admin.user.management': 'User Management',
     'admin.personal.information': 'Personal Infomation',
+    'admin.company.management': 'Organization Management',
     'admin.reset.password': 'Reset Password',
     //System
     'system.title': 'Successfactors Libray',
@@ -43,6 +45,9 @@ const lang = {
     'common.Cancel': 'Cancel',
     'common.Confirm': 'Confirm',
     'common.Add': 'Add',
+    'common.Name': 'Name',
+    'common.Id': 'Id',
+    'common.Displayname': 'Display Name',
     'common.Delete': 'Delete',
     'common.Status': 'Status',
     'common.Pending': 'Pending',
@@ -53,6 +58,7 @@ const lang = {
     'common.User': 'User',
     'common.Gender': 'Gender',
     'common.Female': 'Female',
+    'common.Company': 'Company',
     'common.Male': 'Male',
     'common.Actions': 'Actions',
     'common.lang.en': 'English',

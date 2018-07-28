@@ -2,12 +2,15 @@ import React from 'react';
 import { Input, Icon, Select } from 'antd';
 
 class EditableCell extends React.Component {
-  state = {
-    value: this.props.value,
-    editable: false,
-    compType: this.props.compType,
-    optionList: this.props.optionList || [],
-    displayValue: this.props.optionList ? (this.props.optionList.filter((item) => item.value === this.props.value))[0].label : ''
+  constructor (props) {
+    super(props);
+    this.state = {
+      value: this.props.value,
+      editable: false,
+      compType: this.props.compType,
+      optionList: this.props.optionList || [],
+      displayValue: (this.props && this.props.optionList && this.props.optionList.length > 0) ? (this.props.optionList.filter((item) => item.value === this.props.value))[0].label : ''
+    }
   }
   handleChange = (e) => {
     const value = e.target.value;

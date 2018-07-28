@@ -22,13 +22,15 @@ function Users(props){
       editable: true, compType: 'selection', optionList: [{value: 'female', label: props.intl.formatMessage({id: 'common.Female'})}, 
       {value: 'male', label: props.intl.formatMessage({id: 'common.Male'})}]
     },
-    { title: props.intl.formatMessage({id: 'common.Phone'}), width: 200, dataIndex: 'phone', align: 'left', sorter: true, editable: true}
+    { title: props.intl.formatMessage({id: 'common.Phone'}), width: 200, dataIndex: 'phone', align: 'left', sorter: true, editable: true},
+    { title: props.intl.formatMessage({id: 'common.Password'}), width: 100, dataIndex: 'password', align: 'left', editable: true}
   ];
   const configuration={
     searchKey: 'email',
     tooltip: props.intl.formatMessage({id: 'curd.search.hint'}),
     actions: ['add', 'delete'],
     url: '/api/admin/user',
+     xScroll: 1700,
     addConfig: [
       {
         type: 'Input',
@@ -46,6 +48,11 @@ function Users(props){
         key: 'email',
         required: true,
         validType: 'email'       
+      }, {
+        type: 'Input',
+        label: props.intl.formatMessage({id: 'common.Password'}),
+        key: 'password',
+        required: true,     
       }, {
         type: 'Input',
         label: props.intl.formatMessage({id: 'common.Location'}),

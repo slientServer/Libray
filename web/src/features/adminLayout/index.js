@@ -70,7 +70,7 @@ class AdminLayout extends React.Component {
           </Sider>
           <Layout>
             <Header style={{ background: '#fff', padding: 0 }}>
-              <Row>
+              <Row justify="center">
                 <Col span={2}>
                   <Icon
                     className="trigger"
@@ -78,7 +78,7 @@ class AdminLayout extends React.Component {
                     onClick={this.toggle}
                   />
                 </Col>
-                <Col offset={18} span={2}>
+                <Col offset={17} span={3} >
                   <Select defaultValue={ this.state.defaultLang } onChange={this.langChange}>
                     <Select.Option value="en">{this.props.intl.formatMessage({id: 'common.lang.en'})}</Select.Option>
                     <Select.Option value="zh">{this.props.intl.formatMessage({id: 'common.lang.zh'})}</Select.Option>

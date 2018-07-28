@@ -3,7 +3,6 @@ import { Table, message, Row, Col, Input, Popconfirm, Button, Modal, Form, Selec
 import EditableCell from './editableCell';
 import { getService, postService, putService, deleteService } from '../../utils/requestService';
 import './index.css';
-import sha256 from 'sha256';
 import {withRouter} from 'react-router';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
@@ -124,8 +123,7 @@ class CurdComp extends Component {
         postService({
           'url': this.props.configuration.url, 
           data: {
-            ...value,
-            password: sha256('123456')
+            ...value
           },
           'handler': (res) => {
             if (res.errno === 0) {
@@ -146,7 +144,7 @@ class CurdComp extends Component {
     });
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.requestDataByParams({});
   }
 
@@ -214,7 +212,7 @@ class CurdComp extends Component {
         {this.props.configuration.actions.indexOf('add') !== -1 &&  <Button type="primary" icon="plus-square-o" size="small" style={{marginLeft: "20px"}} onClick={this.onAdd} ghost>{this.props.intl.formatMessage({id: 'common.Add'})}</Button>}
       </Col>
     </Row>
-    <Table scroll={{x: 1600}} size="small" rowKey={record => record.id} onChange={this.onTableUpdate} loading={this.state.fetching} columns={this.state.columns} dataSource={this.state.data} pagination={this.state.pagination} />
+    <Table scroll={{x: this.props.configuration.xScroll}} size="small" rowKey={record => record.id} onChange={this.onTableUpdate} loading={this.state.fetching} columns={this.state.columns} dataSource={this.state.data} pagination={this.state.pagination} />
     <Modal title={this.props.intl.formatMessage({'id': 'common.Add'})}
       visible={this.state.visible}
       onOk={this.addExec}
@@ -227,7 +225,6 @@ class CurdComp extends Component {
             case 'Input': 
               return <FormItem {...formItemLayout} label={item.label} key={item.key}>
                 {getFieldDecorator(item.key, {
-                  initialValue: item.defaultValue,
                   rules: [
                     { required: item.required, message: this.props.intl.formatMessage({id: 'curd.required.field'}) },
                     { type: item.validType, message: this.props.intl.formatMessage({id: 'curd.right.type'})}
@@ -239,7 +236,6 @@ class CurdComp extends Component {
             case 'InputNumber': 
               return <FormItem {...formItemLayout} label={item.label} key={item.key}>
                 {getFieldDecorator(item.key, {
-                  initialValue: item.defaultValue,
                   rules: [
                     { required: item.required, message: this.props.intl.formatMessage({id: 'curd.required.field'}) },
                   ],
@@ -250,7 +246,6 @@ class CurdComp extends Component {
             case 'TextArea': 
               return <FormItem {...formItemLayout} label={item.label} key={item.key}>
                 {getFieldDecorator(item.key, {
-                  initialValue: item.defaultValue,
                   rules: [
                     { required: item.required, message: this.props.intl.formatMessage({id: 'curd.required.field'}) },
                     { type: item.validType, message: this.props.intl.formatMessage({id: 'curd.right.type'})}

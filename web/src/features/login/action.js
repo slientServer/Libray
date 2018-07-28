@@ -18,8 +18,9 @@ export const loginAction = (data) => {
             type: LOGIN_SUCCESSFULLY,
             data: res.data.userInfo
           });
-          dispatch(push('/' + res.data.userInfo.role));
           window.localStorage.setItem('username', res.data.userInfo.username);
+          window.localStorage.setItem('role', res.data.userInfo.role);
+          dispatch(push('/admin'));
         } else {
           message.error(res.errmsg);
           dispatch({
