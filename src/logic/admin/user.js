@@ -1,6 +1,6 @@
 module.exports = class extends think.Logic {
   async putAction () {
-    let editableFields = ['phone', 'email', 'nickname', 'gender', 'location', 'wechat', 'team', 'role', 'password'];
+    let editableFields = ['phone', 'email', 'nickname', 'gender', 'location', 'wechat', 'status', 'team', 'role', 'password'];
     let postData = this.post();
     if (postData && postData.id !== undefined) {
       if (editableFields.indexOf(postData.key) === -1) {
