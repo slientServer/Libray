@@ -38,7 +38,7 @@ class CurdComp extends Component {
         align: 'left',
         render: (text, record) => (
           <span>
-            <Popconfirm title={this.props.intl.formatMessage({id: "curd.confirm.message"})} onConfirm={() => {this.deleteItem(record.id)}} okText={this.props.intl.formatMessage({id: 'common.Confirm'})} cancelText={this.props.intl.formatMessage({id: 'common.Cancel'})}>
+            <Popconfirm title={this.props.intl.formatMessage({id: 'curd.confirm.message'})} onConfirm={() => {this.deleteItem(record.id)}} okText={this.props.intl.formatMessage({id: 'common.Confirm'})} cancelText={this.props.intl.formatMessage({id: 'common.Cancel'})}>
               <a>{this.props.intl.formatMessage({id: 'common.Delete'})}</a>
             </Popconfirm>
           </span>
@@ -78,11 +78,11 @@ class CurdComp extends Component {
             fetching: false
           });
         } else {
-          message.error('Data delete failed!');
+          message.error(this.props.intl.formatMessage({id: 'error.delete'}));
         }
       },
       dispatch: this.props.dispatch,
-      failMsg: 'Data delete failed!'
+      failMsg: this.props.intl.formatMessage({id: 'error.delete'})
     });    
   }
 
@@ -99,17 +99,18 @@ class CurdComp extends Component {
           this.setState({
             fetching: false
           });
-          message.success('Data update successfully！');
+          message.success(this.props.intl.formatMessage({id: 'success.update'}));
         }  else {
-          message.error('Data update failed!');
+          message.error(this.props.intl.formatMessage({id: 'error.update'}));
         }
       },
       dispatch: this.props.dispatch,
-      failMsg: 'Data update failed!'
+      failMsg: this.props.intl.formatMessage({id: 'error.update'})
     });
   }
 
   onAdd = () => {
+    this.props.form.resetFields();
     this.setState({visible: true});
   }
 
@@ -132,13 +133,22 @@ class CurdComp extends Component {
                 confirmLoading: false,
                 visible: false
               });
-              message.success('Data add successfully！');              
+              message.success(this.props.intl.formatMessage({id: 'success.add'}));              
             } else {
-              message.error('Data add failed!');
+              message.error(this.props.intl.formatMessage({id: 'error.update'}));
             }
+            this.setState({
+              confirmLoading: false
+            });
           },
           dispatch: this.props.dispatch,
-          failMsg: 'Data add failed!'
+          failMsg: this.props.intl.formatMessage({id: 'error.update'}),
+          errHandler: () => {
+            this.setState({
+              confirmLoading: false
+            });
+            message.error(this.props.intl.formatMessage({id: 'error.update'}));
+          }
         });
       }
     });
@@ -171,7 +181,7 @@ class CurdComp extends Component {
         this.setState({
           fetching: false
         });
-        message.error('Data request failed!');
+        message.error(this.props.intl.formatMessage({id: 'error.fetch'}));
       },
       dispatch: this.props.dispatch
     });    

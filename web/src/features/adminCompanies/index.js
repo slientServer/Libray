@@ -2,7 +2,7 @@ import React from 'react';
 import CurdComp from '../../components/curdComp';
 import { injectIntl } from 'react-intl';
 
-function Users(props){
+function Companies(props){
   const columns = [
     { title: props.intl.formatMessage({id: 'common.Id'}), dataIndex: 'id', key: 'id' },
     { title: props.intl.formatMessage({id: 'common.Name'}), dataIndex: 'name', key: 'name' },
@@ -42,4 +42,4 @@ function Users(props){
   return <CurdComp columns={columns} configuration={configuration} />;
 }
 
-export default injectIntl(Users);
+export default injectIntl(Companies);

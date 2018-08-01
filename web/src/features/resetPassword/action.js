@@ -12,7 +12,7 @@ export const udpatePasswordAction = (data) => {
       data: data,
       dispatch: dispatch,
       handler: (resData) => {
-        message.success(resData);
+        message.success(resData.errmsg);
         dispatch({
           type: FINISH_REQUEST
         })

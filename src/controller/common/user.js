@@ -41,7 +41,7 @@ module.exports = class extends BaseRest {
     if (userId) {
       let affectRows = await this.model('user').updateUserInfo(userInfo, { 'id': userId });
       if (affectRows > 0){
-        return this.success('Infomation update successfully!');
+        return this.success({}, 'Infomation update successfully!');
       } 
       return this.fail('Infomation update failed!');      
     }

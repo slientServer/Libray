@@ -64,12 +64,17 @@ const lang = {
     'common.lang.en': 'English',
     'common.lang.zh': '中文',
     //Error
-    'error.update': '{item} update failed!',
-    'error.add': '{item} add failed!',
-    'error.delete': '{item} delete failed!',
-    'error.fetch': '{item} fetch failed!',
+    'error.update': 'Data update failed!',
+    'error.add': 'Data add failed!',
+    'error.delete': 'Data delete failed!',
+    'error.fetch': 'Data fetch failed!',
     'error.logout': 'Logout failed!',
-    'error.login': 'Login failed!'
+    'error.login': 'Login failed!',
+    //Success
+    'success.update': 'Data update successfully!',
+    'success.add': 'Data add successfully!',
+    'success.delete': 'Data delete successfully!',
+    'success.fetch': 'Data fetch successfully!'
   }
 }
 

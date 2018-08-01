@@ -1,5 +1,5 @@
 const lang = {
-  locale: 'en',
+  locale: 'zh',
   messages: {
     //Login
     'login.welcome': '中文Welcome to',
@@ -16,6 +16,7 @@ const lang = {
     'register.required.email': '中文Please input your email!',
     'register.required.employeeid': '中文Please input your employee id!',
     'register.required.location': '中文Please select your location!',
+    'register.required.company': '中文Please register with right url!',
     //Curd
     'curd.confirm.message': '中文Please double check if you want?',
     'curd.required.field': '中文Required field!',
@@ -24,6 +25,7 @@ const lang = {
     //Admin
     'admin.user.management': '中文User Management',
     'admin.personal.information': '中文Personal Infomation',
+    'admin.company.management': '中文Organization Management',
     'admin.reset.password': '中文Reset Password',
     //System
     'system.title': '中文Successfactors Libray',
@@ -43,6 +45,9 @@ const lang = {
     'common.Cancel': '中文Cancel',
     'common.Confirm': '中文Confirm',
     'common.Add': '中文Add',
+    'common.Name': '中文Name',
+    'common.Id': '中文Id',
+    'common.Displayname': '中文Display Name',
     'common.Delete': '中文Delete',
     'common.Status': '中文Status',
     'common.Pending': '中文Pending',
@@ -53,17 +58,23 @@ const lang = {
     'common.User': '中文User',
     'common.Gender': '中文Gender',
     'common.Female': '中文Female',
+    'common.Company': '中文Company',
     'common.Male': '中文Male',
     'common.Actions': '中文Actions',
     'common.lang.en': 'English',
-    'common.lang.zh': '中文',
+    'common.lang.zh': '中文中文',
     //Error
-    'error.update': '中文{item} update failed!',
-    'error.add': '中文{item} add failed!',
-    'error.delete': '中文{item} delete failed!',
-    'error.fetch': '中文{item} fetch failed!',
+    'error.update': '中文Data update failed!',
+    'error.add': '中文Data add failed!',
+    'error.delete': '中文Data delete failed!',
+    'error.fetch': '中文Data fetch failed!',
     'error.logout': '中文Logout failed!',
-    'error.login': '中文Login failed!'
+    'error.login': '中文Login failed!',
+    //Success
+    'success.update': '中文Data update successfully!',
+    'success.add': '中文Data add successfully!',
+    'success.delete': '中文Data delete successfully!',
+    'success.fetch': '中文Data fetch successfully!'
   }
 }
 
