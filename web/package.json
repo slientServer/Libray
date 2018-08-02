@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired build && rm -rf ../www/static/build && mv ./build ../www/static",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
@@ -34,5 +34,6 @@
     "/auth/*": {
       "target": "http://127.0.0.1:8360"
     }
-  }
+  },
+  "homepage": "/static/build/"
 }

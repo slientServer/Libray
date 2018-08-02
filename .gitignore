@@ -4,4 +4,5 @@ package-lock.json
 runtime/*
 web/node_modules/*
 web/package-lock.json
+www/static/*
 .idea/workspace.xml

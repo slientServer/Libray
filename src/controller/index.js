@@ -1,7 +1,9 @@
 const Base = require('./base.js');
+const send = require('koa-send');
 
 module.exports = class extends Base {
-  indexAction() {
-    return this.display();
+  async indexAction() {
+    let res = await send(this.ctx, 'www/static/build/index.html');
+    return res;
   }
 };
