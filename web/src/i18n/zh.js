@@ -28,7 +28,7 @@ const lang = {
     'admin.company.management': '中文Organization Management',
     'admin.reset.password': '中文Reset Password',
     //System
-    'system.title': '中文Successfactors Libray',
+    'system.title': '中文 Libray',
     //Common
     'common.Username': '中文Username',
     'common.Password': '中文Password',

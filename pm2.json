@@ -1,8 +1,8 @@
 {
   "apps": [{
-    "name": "demo",
+    "name": "Libray",
     "script": "production.js",
-    "cwd": "/Users/i308845/Workspace/react/full/Libray/demo",
+    "cwd": "/Users/i308845/Workspace/react/full/Libray",
     "exec_mode": "fork",
     "max_memory_restart": "1G",
     "autorestart": true,

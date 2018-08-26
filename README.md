@@ -1,22 +1,36 @@
 
-Application created by [ThinkJS](http://www.thinkjs.org)
+Full stack application based on Thinkjs+React+Antd+Mysql+geetest
+
+## Features
+* User management
+* Anthorization
+* Register
+* I18N
+* Theming
+* Dynamic captcha
+
+## Structure
+* Library/web/i18n //Config i18n
+* Library/config-overrides //Config theme
 
 ## Install dependencies
 
 ```
-npm install
+Run npm install under Library and npm install under Library/web separately.
 ```
 
 ## Start server
 
-```
-npm start
-```
+* Run "npm start" under Library to start server
+* Run "npm start" under Library/web to start react app
+
 
 ## Deploy with pm2
+* Run "npm run build" to deploy react app into thinkjs
+* Then follow thinkjs deployment guid
 
-Use pm2 to deploy app on production enviroment.
-
-```
-pm2 startOrReload pm2.json
-```
+## Todo
+* Refine message
+* Runtime theme
+* Home page
+* ...

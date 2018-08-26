@@ -28,7 +28,7 @@ const lang = {
     'admin.company.management': 'Organization Management',
     'admin.reset.password': 'Reset Password',
     //System
-    'system.title': 'Successfactors Libray',
+    'system.title': 'Libray',
     //Common
     'common.Username': 'Username',
     'common.Password': 'Password',
