@@ -53,6 +53,9 @@ module.exports = class extends think.Logic {
 
   registerAction () {
     this.allowMethods = 'post';
+    if (!think.config('isEnableRegister')) {
+      return this.fail(403, 'Invalid request!');
+    }
     let rules = {
       username: {
           string: true,       // 字段类型为 String 类型

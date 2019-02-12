@@ -7,9 +7,9 @@ import { hot } from 'react-hot-loader';
 const App = () => (
   <div>
     <Switch>
-      <Route path="/" exact component={ Login } />
+      <Route path="/" component={ Login } />
       <Route path="/login" component={ Login } />
-      <Route path="/register" component={ Register } />
+      {/* <Route path="/register" component={ Register } /> */}
       <Route path="/admin" component={ Admin } />
     </Switch>
   </div>

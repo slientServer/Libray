@@ -51,17 +51,9 @@ class Login extends React.Component {
               )}
             </FormItem>
             <FormItem>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(
-                <Checkbox>{this.props.intl.formatMessage({id: 'login.Remember'})}</Checkbox>
-              )}
-              <a className="login-form-forgot" href=""><FormattedMessage id="login.Forget.password"/></a>
               <Button type="primary" htmlType="submit" className="login-form-button" loading={this.props.isFetching} disabled = {!this.props.isVerified}>
                 <FormattedMessage id="login.Login"/>
               </Button>
-              <FormattedMessage id="common.Or"/> <a href="/register"><FormattedMessage id="login.Register"/></a>
             </FormItem>
           </Form>          
         </Col>
