@@ -86,7 +86,7 @@ class AdminLayout extends React.Component {
                 </Col>
                 <Col span={1}>
                   <span style={{ marginRight: 24 }}>
-                    <CustomAvatar username = {this.props.userInfo.username || window.localStorage.getItem('username') } count = {1}/>
+                    <CustomAvatar username = {this.props.userInfo.username || window.localStorage.getItem('username') } count = {0}/>
                   </span>
                 </Col>
                 <Col span={1}>
