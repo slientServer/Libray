@@ -74,7 +74,9 @@ const lang = {
     'success.update': 'Data update successfully!',
     'success.add': 'Data add successfully!',
     'success.delete': 'Data delete successfully!',
-    'success.fetch': 'Data fetch successfully!'
+    'success.fetch': 'Data fetch successfully!',
+    //Captcha
+    'captcha.loading': 'Security Checking...'
   }
 }
 

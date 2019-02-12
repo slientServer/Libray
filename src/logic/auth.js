@@ -3,7 +3,7 @@ const Geetest = require('gt3-sdk');
 module.exports = class extends think.Logic {
 
   async __before() {
-    if (this.ctx.method === 'POST') {
+    if (think.config('isEnableCaptcha') === true) {
       let rules = {
         geetest_challenge: {
             string: true,       // 字段类型为 String 类型
@@ -24,12 +24,13 @@ module.exports = class extends think.Logic {
       let flag = this.validate(rules);
       let postData = this.ctx.post();
       if (!flag || ! (await this.verifyCaptcha(postData))) {
-        return this.fail('Please input correct captcha!', this.validateErrors);
+        return this.fail(400, 'Please input correct captcha!', this.validateErrors);
       }
     }
   }
 
   loginAction() {
+    this.allowMethods = 'post';
     let rules = {
       username: {
           string: true,       // 字段类型为 String 类型
@@ -46,11 +47,12 @@ module.exports = class extends think.Logic {
     }
     let flag = this.validate(rules);
     if (!flag) {
-      return this.fail('Please input username or password!', this.validateErrors);
+      return this.fail(400, 'Please input username or password!', this.validateErrors);
     } 
   }
 
   registerAction () {
+    this.allowMethods = 'post';
     let rules = {
       username: {
           string: true,       // 字段类型为 String 类型
@@ -95,15 +97,15 @@ module.exports = class extends think.Logic {
     }
     let flag = this.validate(rules);
     if (!flag) {
-      return this.fail('Please input all required fields!', this.validateErrors);
+      return this.fail(400, 'Please input all required fields!', this.validateErrors);
     }    
   }
 
   async verifyCaptcha (data) {
     // 对form表单提供的验证凭证进行验证
     let captcha = new Geetest({
-      geetest_id: this.ctx.config('geetest').geetest_id,
-      geetest_key: this.ctx.config('geetest').geetest_key
+      geetest_id: think.config('geetest').geetest_id,
+      geetest_key: think.config('geetest').geetest_key
     });
     try {
       let res = await captcha.validate((await this.session('fallback')), {

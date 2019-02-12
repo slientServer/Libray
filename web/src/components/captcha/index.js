@@ -3,7 +3,7 @@
 */
 import React, { Component } from 'react';
 import initGeetestReact from './gt';
-import './index.css';
+import './style.css';
 import { connect } from 'react-redux';
 import { verifiedAction, requestCaptchaAction, resetRefreshCaptachaAction } from './action';
 import { FormattedMessage } from 'react-intl';
@@ -21,27 +21,31 @@ class Captcha extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.refreshCaptacha) {
+    if (nextProps.refreshCaptacha && this.captchaObj) {
       this.captchaObj.reset();
       this.props.dispatchResetRefreshCaptachaAction();
     }
   }
 
   addCaptchaToDom = (captchaObj) => {
-    this.captchaObj = captchaObj;
-    captchaObj.appendTo('#captcha');
-    captchaObj.onReady(() => {
+    if (captchaObj) {
+      this.captchaObj = captchaObj;
+      captchaObj.appendTo('#captcha');
+      captchaObj.onReady(() => {
+        this.setState({toggleClass: 'hidden'});
+      });
+      captchaObj.onSuccess(() => {
+        this.props.dispatchVeriyfySuccess(captchaObj.getValidate());
+      });
+    } else {
       this.setState({toggleClass: 'hidden'});
-    });
-    captchaObj.onSuccess(() => {
-      this.props.dispatchVeriyfySuccess(captchaObj.getValidate());
-    });
+    }
   }
 
   render () {
     return (
       <div id="captcha">
-        <p className={this.state.toggleClass}><FormattedMessage id="common.Loading"/></p>
+        <p className={this.state.toggleClass}><FormattedMessage id="captcha.loading"/></p>
       </div>
     );
   }
